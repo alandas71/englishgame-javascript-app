@@ -15,7 +15,7 @@
     background-image: url('../img/wallpaper.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
+    position: relative;
 }
 
 .container-flex {
@@ -40,6 +40,15 @@
     color: white;
     background-color: rgb(221, 40, 40);
     border-radius: 5px;
+}
+
+#face {
+    margin-top: 50px;
+    margin-right: 50px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    cursor: pointer;
 }
 
 .back:hover {
