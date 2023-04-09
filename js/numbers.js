@@ -1,17 +1,13 @@
 var item = [
-    "apple",
-    "avocado",
-    "banana",
-    "cherry",
-    "coconut",
-    "grape",
-    "guava",
-    "lemon",
-    "mango",
-    "orange",
-    "pear",
-    "pineapple",
-    "watermelon",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
 ];
 
 //Faz um array com 4 números sorteados aleatórios para as opções
@@ -35,31 +31,31 @@ var arrayElement = [];
 //Monta o array com itens aleatórios
 for (let i = 0; i <= 3; i++) {
     var randomElement = item[Math.floor(Math.random() * item.length)];
-    arrayElement.push(randomElement);    
+    arrayElement.push(randomElement);
 }
 
 //exclui itens repetidos
 var arrUnicos = new Set();
 arrayElement.forEach((arrNome) => {
-     arrUnicos.add(arrNome);
+    arrUnicos.add(arrNome);
 })
 newArr = [...arrUnicos.values()];
 
 //Enquanto a quantidade de array for menor de 4 ele vai procurar itens que não são repetidos
-while(newArr.length < 4){
+while (newArr.length < 4) {
     var randomElement = item[Math.floor(Math.random() * item.length)];
-    if(newArr.indexOf(randomElement) === -1) {
+    if (newArr.indexOf(randomElement) === -1) {
         newArr.push(randomElement)
     }
 }
 
 //Monta o nome das opções
 newArr.forEach((i, index) => {
-    document.querySelector("#option" + randomNmb[index]).innerHTML = i.toUpperCase(); 
+    document.querySelector("#option" + randomNmb[index]).innerHTML = i.toUpperCase();
 })
 
 //Monta a imagem 
-var imagem = document.querySelector('.figure').style.backgroundImage = `url('../jogo_ingles/img/${randomElement}.jpg')`;
+var imagem = document.querySelector('.figure').style.backgroundImage = `url('../img/${randomElement}.jpg')`;
 //Coloca tudo em maiúsculo para facilitar a validação
 randomElement = randomElement.toUpperCase();
 //Ao clicar no botão velida se a resposta está certa
@@ -70,7 +66,10 @@ for (let i = 0; i <= 3; i++) {
         if (nome == randomElement) {
             document.getElementById(targetId).style.backgroundColor = "#16d70b";
             disableAll();
-            soundTrue();
+            soundCorrect();
+            setTimeout(() => {
+                soundTrue();
+            }, "1000")
         } else {
             document.getElementById(targetId).style.backgroundColor = "#d70b1c";
             e.target.disabled = true;
@@ -88,7 +87,7 @@ function disableAll() {
 function soundTrue() {
     function playSound() {
         let audio = new Audio();
-        audio.src = `sound/${randomElement}.mp3`;
+        audio.src = `../sound/${randomElement}.mp3`;
         audio.loop = false;
         audio.play();
     }
@@ -101,10 +100,20 @@ function soundTrue() {
 function soundFalse() {
     function playSound() {
         let audio = new Audio();
-        audio.src = "sound/resposta_errada.mp3";
+        audio.src = "../sound/resposta_errada.mp3";
         audio.loop = false;
         audio.play();
     }
     playSound();
 
 };
+
+function soundCorrect() {
+    function playSound() {
+        let audio = new Audio();
+        audio.src = "../sound/resposta_certa.mp3";
+        audio.loop = false;
+        audio.play();
+    }
+    playSound();
+}
